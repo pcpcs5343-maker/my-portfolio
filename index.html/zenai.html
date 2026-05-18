@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>زين AI – منصتك الذكية الشاملة</title>
+<meta name="description" content="22+ أداة ذكاء اصطناعي تعمل داخل المتصفح مجاناً بالعربية">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --bg:#07070f;--bg2:#0d0d1a;--bg3:#131325;
+  --brd:rgba(139,92,246,.13);--brd2:rgba(139,92,246,.3);--brd3:rgba(139,92,246,.55);
+  --p:#8B5CF6;--p2:#A78BFA;--g:#10B981;--g2:#34D399;
+  --o:#F59E0B;--r:#EF4444;--b:#3B82F6;
+  --tx:#EDE9FE;--tx2:#9B8EC4;--tx3:#4D4870;
+  --glow:rgba(139,92,246,.22);
+  --font:'Cairo',sans-serif;--ease:cubic-bezier(.4,0,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--tx);direction:rtl;overflow-x:hidden;line-height:1.7;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:linear-gradient(var(--p),var(--g));border-radius:4px;}
+.orb{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;}
+.o1{width:700px;height:700px;background:rgba(139,92,246,.07);top:-250px;right:-150px;}
+.o2{width:500px;height:500px;background:rgba(16,185,129,.05);bottom:-150px;left:-100px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:66px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(7,7,15,.9);backdrop-filter:blur(28px);border-bottom:1px solid var(--brd);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;}
+.logo-mark{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--p),var(--g));display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;color:#fff;box-shadow:0 0 22px var(--glow);}
+.logo-name{font-size:21px;font-weight:900;background:linear-gradient(135deg,#fff,var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-mid{display:flex;gap:1.5rem;list-style:none;}
+.nav-mid a{color:var(--tx2);text-decoration:none;font-size:13px;font-weight:600;transition:.2s;cursor:pointer;}
+.nav-mid a:hover{color:var(--tx);}
+.nav-end{display:flex;gap:10px;align-items:center;}
+.n-ghost{padding:8px 18px;border:1px solid var(--brd2);border-radius:10px;background:transparent;color:var(--tx);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.n-ghost:hover{background:rgba(139,92,246,.1);}
+.n-solid{padding:9px 20px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--p),#6D28D9);color:#fff;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;transition:.2s;box-shadow:0 4px 18px var(--glow);}
+.n-solid:hover{transform:translateY(-1px);}
+.hamburger{display:none;background:transparent;border:1px solid var(--brd2);border-radius:9px;color:var(--tx);width:38px;height:38px;align-items:center;justify-content:center;font-size:18px;cursor:pointer;}
+@media(max-width:860px){.nav-mid{display:none;}.hamburger{display:flex;}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 2rem 5rem;position:relative;z-index:1;}
+.hero-in{max-width:860px;}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:100px;border:1px solid rgba(16,185,129,.3);background:rgba(16,185,129,.07);color:var(--g2);font-size:13px;font-weight:600;margin-bottom:2rem;}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--g2);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;transform:scale(.7);}}
+.hero h1{font-size:clamp(2.4rem,7vw,5rem);font-weight:900;line-height:1.08;margin-bottom:1.5rem;letter-spacing:-1px;}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--p2),var(--g2) 55%,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:1.05rem;color:var(--tx2);max-width:580px;margin:0 auto 2.5rem;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;}
+.hb{padding:14px 32px;border-radius:14px;font-family:var(--font);font-size:15px;font-weight:700;cursor:pointer;transition:.3s;}
+.hb-fill{background:linear-gradient(135deg,var(--p),#6D28D9);color:#fff;border:none;box-shadow:0 8px 32px var(--glow);}
+.hb-fill:hover{transform:translateY(-2px);}
+.hb-out{background:rgba(255,255,255,.04);color:var(--tx);border:1px solid var(--brd2);}
+.hb-out:hover{background:rgba(255,255,255,.08);}
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;}
+.hs-n{font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--p2),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hs-l{font-size:11px;color:var(--tx3);margin-top:2px;}
+
+/* SEARCH */
+.search-sec{position:relative;z-index:1;padding:0 2rem 3rem;max-width:660px;margin:0 auto;}
+.s-box{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.03);border:1px solid var(--brd2);border-radius:18px;padding:13px 20px;transition:.3s;}
+.s-box:focus-within{border-color:var(--p);box-shadow:0 0 0 4px rgba(139,92,246,.11);}
+.s-inp{flex:1;background:transparent;border:none;outline:none;color:var(--tx);font-family:var(--font);font-size:15px;direction:rtl;}
+.s-inp::placeholder{color:var(--tx3);}
+
+/* SEC */
+.sec{position:relative;z-index:1;padding:2rem 2rem 3rem;max-width:1340px;margin:0 auto;}
+.sec-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.6rem;}
+.sec-ttl{font-size:1.5rem;font-weight:800;}
+.sec-ttl span{background:linear-gradient(135deg,var(--p2),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* FEATURED */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+@media(max-width:1000px){.feat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:540px){.feat-grid{grid-template-columns:1fr;}}
+.fc{border-radius:22px;padding:2rem;cursor:pointer;transition:.35s;position:relative;overflow:hidden;min-height:185px;display:flex;flex-direction:column;justify-content:flex-end;border:1px solid rgba(255,255,255,.06);}
+.fc::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(0,0,0,.65));z-index:0;}
+.fc:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 24px 60px rgba(0,0,0,.45);}
+.fc1{background:linear-gradient(145deg,#1a0533,#3b1085,#5620c8);}
+.fc2{background:linear-gradient(145deg,#012b1e,#015538,#018c62);}
+.fc3{background:linear-gradient(145deg,#1f0800,#6b1f00,#b84500);}
+.fc4{background:linear-gradient(145deg,#0a1a36,#1a3d78,#2468cc);}
+.fc-em{position:absolute;top:1.3rem;right:1.3rem;font-size:3rem;z-index:1;}
+.fc-tag{font-size:10px;font-weight:700;letter-spacing:1.2px;color:rgba(255,255,255,.42);margin-bottom:4px;text-transform:uppercase;position:relative;z-index:1;}
+.fc-ttl{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:3px;position:relative;z-index:1;}
+.fc-dsc{font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.5;position:relative;z-index:1;}
+
+/* TABS */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.6rem;}
+.tab{padding:8px 18px;border-radius:100px;border:1px solid var(--brd);background:transparent;color:var(--tx2);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;}
+.tab:hover{border-color:var(--brd2);color:var(--tx);}
+.tab.on{background:var(--p);border-color:var(--p);color:#fff;box-shadow:0 4px 18px var(--glow);}
+
+/* TOOLS GRID */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;}
+.tc{background:rgba(255,255,255,.026);border:1px solid var(--brd);border-radius:20px;padding:1.3rem;cursor:pointer;transition:.3s;position:relative;overflow:hidden;}
+.tc:hover{border-color:var(--brd3);transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.3);}
+.tc-badge{position:absolute;top:.8rem;left:.8rem;padding:2px 9px;border-radius:100px;font-size:10px;font-weight:700;}
+.bf{background:rgba(16,185,129,.14);color:#34D399;}
+.bn{background:rgba(139,92,246,.14);color:#A78BFA;}
+.bh{background:rgba(239,68,68,.14);color:#FCA5A5;}
+.bw{background:rgba(59,130,246,.14);color:#93C5FD;}
+.tc-ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:.9rem;}
+.tc-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+.tc-desc{font-size:11.5px;color:var(--tx2);line-height:1.6;}
+.tc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--brd);}
+.tc-uses{font-size:11px;color:var(--tx3);}
+.fav-btn{background:transparent;border:none;color:var(--tx3);cursor:pointer;font-size:16px;transition:.2s;}
+.fav-btn:hover,.fav-btn.on{color:#EF4444;}
+
+/* VIP */
+.vip-wrap{position:relative;z-index:1;max-width:1340px;margin:0 auto;padding:0 2rem 2.5rem;}
+.vip-card{background:linear-gradient(135deg,#1c1000,#3d2800,#5c3c00);border:1px solid rgba(245,158,11,.22);border-radius:22px;padding:1.8rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;position:relative;overflow:hidden;}
+.vip-card::before{content:'👑';position:absolute;right:-5px;top:-15px;font-size:9rem;opacity:.05;}
+.vip-info h3{font-size:1.1rem;font-weight:800;color:var(--o);margin-bottom:4px;}
+.vip-info p{font-size:13px;color:rgba(245,158,11,.5);}
+.vip-btn{padding:11px 28px;background:linear-gradient(135deg,var(--o),#d97706);border:none;border-radius:12px;color:#000;font-family:var(--font);font-size:14px;font-weight:800;cursor:pointer;transition:.3s;}
+.vip-btn:hover{transform:translateY(-1px);}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(18px);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem;}
+.overlay.open{display:flex;}
+.modal{background:linear-gradient(160deg,#111128,#0d0d20);border:1px solid var(--brd2);border-radius:26px;padding:2.2rem;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:popIn .3s var(--ease);box-shadow:0 32px 90px rgba(0,0,0,.55);}
+@keyframes popIn{from{opacity:0;transform:scale(.93) translateY(24px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.mod-x{position:absolute;top:1.2rem;left:1.2rem;background:rgba(255,255,255,.06);border:1px solid var(--brd);border-radius:9px;color:var(--tx2);cursor:pointer;width:33px;height:33px;display:flex;align-items:center;justify-content:center;font-size:17px;transition:.2s;}
+.mod-x:hover{background:rgba(255,255,255,.12);color:var(--tx);}
+.m-ico{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:1rem;}
+.m-ttl{font-size:1.35rem;font-weight:800;margin-bottom:5px;}
+.m-dsc{color:var(--tx2);font-size:13px;line-height:1.8;margin-bottom:1rem;}
+.m-ta{background:rgba(255,255,255,.03);border:1px solid var(--brd2);border-radius:14px;padding:1rem;width:100%;min-height:110px;color:var(--tx);font-family:var(--font);font-size:14px;resize:vertical;outline:none;direction:rtl;transition:.3s;margin-bottom:.9rem;}
+.m-ta:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(139,92,246,.14);}
+.m-ta::placeholder{color:var(--tx3);}
+.btn-p{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,var(--p),#6D28D9);color:#fff;font-family:var(--font);font-size:15px;font-weight:700;cursor:pointer;transition:.3s;box-shadow:0 6px 24px var(--glow);margin-bottom:.5rem;}
+.btn-p:hover{transform:translateY(-1px);}
+.btn-p:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-g{width:100%;padding:13px;border:none;border-radius:13px;background:linear-gradient(135deg,var(--g),#059669);color:#fff;font-family:var(--font);font-size:15px;font-weight:700;cursor:pointer;transition:.3s;margin-bottom:.5rem;}
+.btn-g:hover{transform:translateY(-1px);}
+.btn-g:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-sm{padding:8px 18px;border-radius:10px;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;border:1px solid var(--brd2);background:rgba(255,255,255,.04);color:var(--tx2);}
+.btn-sm:hover{background:rgba(255,255,255,.08);color:var(--tx);}
+.btn-dl{padding:9px 18px;background:linear-gradient(135deg,var(--b),#2563EB);border:none;border-radius:10px;color:#fff;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.2s;}
+.btn-dl:hover{transform:translateY(-1px);}
+.m-load{display:none;align-items:center;gap:12px;color:var(--tx2);font-size:14px;margin-top:.8rem;padding:1rem;background:rgba(255,255,255,.03);border-radius:12px;}
+.m-load.show{display:flex;}
+.spin{width:20px;height:20px;border:2.5px solid var(--brd2);border-top-color:var(--p);border-radius:50%;animation:rot .8s linear infinite;flex-shrink:0;}
+@keyframes rot{to{transform:rotate(360deg);}}
+.m-res{background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(139,92,246,.04));border:1px solid rgba(16,185,129,.2);border-radius:13px;padding:1.1rem;font-size:14px;line-height:1.9;color:var(--tx);display:none;margin-top:.8rem;white-space:pre-wrap;}
+.m-res.show{display:block;}
+.m-err{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:13px;padding:1rem;font-size:13px;color:#FCA5A5;display:none;margin-top:.8rem;}
+.m-err.show{display:block;}
+
+/* KEY SETUP BANNER */
+.key-banner{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(139,92,246,.06));border:1px solid rgba(59,130,246,.25);border-radius:16px;padding:1.2rem 1.5rem;margin-bottom:1rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.key-banner .ki{font-size:1.8rem;}
+.key-banner .kt{flex:1;min-width:180px;}
+.key-banner .kt strong{display:block;font-size:13.5px;font-weight:700;color:#93C5FD;margin-bottom:3px;}
+.key-banner .kt p{font-size:12px;color:var(--tx2);}
+.key-inp-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.key-inp{flex:1;min-width:160px;background:rgba(255,255,255,.05);border:1px solid var(--brd2);border-radius:10px;padding:9px 14px;color:var(--tx);font-family:var(--font);font-size:13px;outline:none;direction:ltr;}
+.key-inp:focus{border-color:var(--b);}
+.key-save{padding:9px 18px;background:linear-gradient(135deg,var(--b),#2563EB);border:none;border-radius:10px;color:#fff;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
+
+/* FILE UPLOAD */
+.drop-zone{border:2px dashed var(--brd2);border-radius:16px;padding:1.8rem;text-align:center;cursor:pointer;transition:.3s;background:rgba(255,255,255,.02);margin-bottom:1rem;}
+.drop-zone:hover{border-color:var(--p);background:rgba(139,92,246,.05);}
+.drop-icon{font-size:2.4rem;margin-bottom:.5rem;}
+.drop-txt{font-size:14px;color:var(--tx2);}
+.drop-sub{font-size:11px;color:var(--tx3);margin-top:4px;}
+.canvas-wrap{text-align:center;margin:.8rem 0;}
+.canvas-wrap canvas,.canvas-wrap img{max-width:100%;max-height:220px;border-radius:12px;border:1px solid var(--brd);}
+.slider-group{margin-bottom:.8rem;}
+.slider-lbl{display:flex;justify-content:space-between;font-size:12.5px;color:var(--tx2);margin-bottom:4px;}
+input[type=range]{width:100%;-webkit-appearance:none;height:4px;border-radius:2px;background:var(--brd2);outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--p);cursor:pointer;box-shadow:0 0 7px var(--glow);}
+
+/* SPEECH */
+.speech-btn{width:78px;height:78px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--r),#b91c1c);color:#fff;font-size:28px;cursor:pointer;transition:.3s;box-shadow:0 8px 24px rgba(239,68,68,.3);display:block;margin:1rem auto;}
+.speech-btn.rec{animation:prec 1s infinite;}
+@keyframes prec{0%,100%{box-shadow:0 8px 24px rgba(239,68,68,.3);}50%{box-shadow:0 8px 40px rgba(239,68,68,.7);}}
+
+/* AUTH */
+.auth-tabs{display:flex;border-radius:12px;border:1px solid var(--brd);padding:4px;margin-bottom:1.2rem;}
+.a-tab{flex:1;padding:9px;background:transparent;border:none;border-radius:9px;color:var(--tx2);font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:.2s;}
+.a-tab.on{background:var(--p);color:#fff;}
+.fg{margin-bottom:.9rem;}
+.fl{display:block;font-size:12.5px;color:var(--tx2);margin-bottom:5px;font-weight:500;}
+.fi{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--brd2);border-radius:11px;padding:10px 14px;color:var(--tx);font-family:var(--font);font-size:14px;direction:rtl;outline:none;transition:.3s;}
+.fi:focus{border-color:var(--p);}
+.auth-err{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:10px 14px;font-size:13px;color:#FCA5A5;margin-bottom:.9rem;display:none;}
+.auth-err.show{display:block;}
+.soc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1rem;}
+.soc-btn{padding:11px;background:rgba(255,255,255,.04);border:1px solid var(--brd);border-radius:11px;color:var(--tx);font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;}
+.soc-btn:hover{background:rgba(255,255,255,.08);}
+.u-wrap{position:relative;}
+.u-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--g));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;cursor:pointer;border:2px solid transparent;transition:.2s;}
+.u-av:hover{border-color:var(--p);}
+.u-dd{position:absolute;top:calc(100% + 10px);left:0;background:var(--bg3);border:1px solid var(--brd2);border-radius:14px;padding:6px;width:195px;display:none;z-index:300;box-shadow:0 14px 44px rgba(0,0,0,.45);}
+.u-dd.open{display:block;}
+.ddi{padding:10px 13px;border-radius:9px;font-size:13px;color:var(--tx2);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px;}
+.ddi:hover{background:rgba(255,255,255,.05);color:var(--tx);}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--brd);padding:3.5rem 2rem 2rem;}
+.foot-in{max-width:1340px;margin:0 auto;}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.5rem;}
+@media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.foot-grid{grid-template-columns:1fr;}}
+.fbrand p{font-size:13px;color:var(--tx3);line-height:1.8;margin-top:10px;max-width:240px;}
+.fcol h4{font-size:13px;font-weight:700;margin-bottom:.9rem;color:var(--tx2);}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.flinks a{font-size:13px;color:var(--tx3);text-decoration:none;transition:.2s;cursor:pointer;}
+.flinks a:hover{color:var(--tx);}
+.fbot{border-top:1px solid var(--brd);padding-top:1.3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.fcopy{font-size:12px;color:var(--tx3);}
+.ftags{display:flex;gap:8px;flex-wrap:wrap;}
+.ftag{padding:3px 11px;border-radius:100px;border:1px solid var(--brd);font-size:11px;color:var(--tx3);}
+.notif{position:fixed;bottom:2rem;right:2rem;background:var(--bg3);border:1px solid var(--brd2);border-radius:14px;padding:13px 20px;font-size:14px;z-index:9999;display:none;align-items:center;gap:10px;box-shadow:0 14px 44px rgba(0,0,0,.45);max-width:300px;}
+.notif.show{display:flex;animation:slL .3s var(--ease);}
+@keyframes slL{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.rv.vis{opacity:1;transform:translateY(0);}
+@media(max-width:600px){.hero h1{font-size:2.2rem;}.tools-grid{grid-template-columns:1fr;}}
+select.fi{cursor:pointer;}
+.result-box{background:rgba(255,255,255,.03);border:1px solid var(--brd);border-radius:13px;padding:1rem;font-size:13.5px;color:var(--tx2);direction:auto;min-height:80px;white-space:pre-wrap;max-height:280px;overflow-y:auto;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:.8rem 0;}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo" onclick="goHome()">
+    <div class="logo-mark">ز</div>
+    <span class="logo-name">زين AI</span>
+  </div>
+  <ul class="nav-mid">
+    <li><a onclick="goHome();scrollTo('tools')">الأدوات</a></li>
+    <li><a onclick="showInfo('about')">من نحن</a></li>
+    <li><a onclick="showInfo('privacy')">الخصوصية</a></li>
+    <li><a onclick="showInfo('contact')">تواصل</a></li>
+  </ul>
+  <div class="nav-end" id="navEnd">
+    <button class="n-ghost" onclick="openAuth('login')">دخول</button>
+    <button class="n-solid" onclick="openAuth('signup')">ابدأ مجاناً ✨</button>
+  </div>
+  <button class="hamburger" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- MAIN -->
+<div id="mainPage">
+<section class="hero">
+  <div class="hero-in">
+    <div class="pill"><div class="pill-dot"></div>كل الأدوات تعمل داخل المتصفح فعلاً</div>
+    <h1>كل ما تحتاجه<br><em>في مكان واحد</em></h1>
+    <p class="hero-sub">22+ أداة تعمل كلها داخل المتصفح — بدون مواقع خارجية، مجاناً وبالعربية</p>
+    <div class="hero-btns">
+      <button class="hb hb-fill" onclick="scrollTo('tools')">🚀 استكشف الأدوات</button>
+      <button class="hb hb-out" onclick="openAuth('signup')">إنشاء حساب مجاني</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hs-n">22+</div><div class="hs-l">أداة تعمل فعلاً</div></div>
+      <div><div class="hs-n">100%</div><div class="hs-l">داخل المتصفح</div></div>
+      <div><div class="hs-n">مجاني</div><div class="hs-l">بالكامل</div></div>
+      <div><div class="hs-n">عربي</div><div class="hs-l">دعم كامل</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="search-sec">
+  <div class="s-box">
+    <span style="font-size:18px;color:var(--tx3)">🔍</span>
+    <input class="s-inp" type="text" placeholder="ابحث عن أداة..." oninput="filterTools(this.value)">
+  </div>
+</div>
+
+<section class="sec">
+  <div class="sec-top"><h2 class="sec-ttl">⭐ <span>مميز اليوم</span></h2></div>
+  <div class="feat-grid">
+    <div class="fc fc1 rv" onclick="openTool('bgremove')"><div class="fc-em">✂️</div><div class="fc-tag">يعمل في المتصفح</div><div class="fc-ttl">إزالة الخلفية</div><div class="fc-dsc">احذف خلفية أي صورة فوراً</div></div>
+    <div class="fc fc2 rv" onclick="openTool('speech')"><div class="fc-em">🎤</div><div class="fc-tag">ميكروفون مباشر</div><div class="fc-ttl">صوت إلى نص</div><div class="fc-dsc">تحويل فوري بالميكروفون</div></div>
+    <div class="fc fc3 rv" onclick="openTool('pdf')"><div class="fc-em">📋</div><div class="fc-tag">قراءة وتحليل</div><div class="fc-ttl">أدوات PDF</div><div class="fc-dsc">اقرأ وحول ملفات PDF</div></div>
+    <div class="fc fc4 rv" onclick="openTool('photoedit')"><div class="fc-em">🖼️</div><div class="fc-tag">تعديل احترافي</div><div class="fc-ttl">تعديل الصور</div><div class="fc-dsc">فلاتر وتحسين داخل الموقع</div></div>
+  </div>
+</section>
+
+<div class="vip-wrap">
+  <div class="vip-card rv">
+    <div class="vip-info"><h3>👑 قريباً — اشتراك VIP</h3><p>استخدام غير محدود وأدوات متقدمة</p></div>
+    <button class="vip-btn" onclick="showNotif('تم التسجيل! 🎉')">سجّل مجاناً</button>
+  </div>
+</div>
+
+<section class="sec" id="tools">
+  <div class="sec-top"><h2 class="sec-ttl">🛠️ <span>جميع الأدوات</span></h2></div>
+  <div class="tabs">
+    <button class="tab on" onclick="filterCat('all',this)">الكل</button>
+    <button class="tab" onclick="filterCat('files',this)">📁 الملفات والصور</button>
+    <button class="tab" onclick="filterCat('ai',this)">🤖 ذكاء اصطناعي</button>
+    <button class="tab" onclick="filterCat('study',this)">📚 الدراسة</button>
+    <button class="tab" onclick="filterCat('health',this)">🏃 الصحة</button>
+    <button class="tab" onclick="filterCat('work',this)">💼 العمل</button>
+  </div>
+  <div class="tools-grid" id="toolsGrid"></div>
+</section>
+</div>
+
+<!-- INFO PAGE -->
+<div id="infoPage" style="display:none;padding-top:80px;min-height:80vh;position:relative;z-index:1;">
+  <div style="max-width:700px;margin:0 auto;padding:2rem" id="infoContent"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-grid">
+      <div class="fbrand">
+        <div class="logo" onclick="goHome()"><div class="logo-mark">ز</div><span class="logo-name">زين AI</span></div>
+        <p>كل الأدوات تعمل داخل المتصفح — مجانية وسريعة وذكية.</p>
+      </div>
+      <div class="fcol"><h4>أدوات الملفات</h4><ul class="flinks">
+        <li><a onclick="openTool('bgremove')">إزالة الخلفية</a></li>
+        <li><a onclick="openTool('photoedit')">تعديل الصور</a></li>
+        <li><a onclick="openTool('compress')">ضغط الصور</a></li>
+        <li><a onclick="openTool('imgconvert')">تحويل صيغ</a></li>
+        <li><a onclick="openTool('pdf')">أدوات PDF</a></li>
+        <li><a onclick="openTool('speech')">صوت إلى نص</a></li>
+      </ul></div>
+      <div class="fcol"><h4>أدوات AI</h4><ul class="flinks">
+        <li><a onclick="openTool('summarize')">تلخيص النصوص</a></li>
+        <li><a onclick="openTool('cv')">إنشاء CV</a></li>
+        <li><a onclick="openTool('translate')">الترجمة</a></li>
+        <li><a onclick="openTool('study')">مساعد الدراسة</a></li>
+        <li><a onclick="openTool('assistant')">المساعد الشخصي</a></li>
+      </ul></div>
+      <div class="fcol"><h4>المنصة</h4><ul class="flinks">
+        <li><a onclick="showInfo('about')">من نحن</a></li>
+        <li><a onclick="showInfo('privacy')">الخصوصية</a></li>
+        <li><a onclick="showInfo('terms')">الشروط</a></li>
+        <li><a onclick="showInfo('contact')">تواصل معنا</a></li>
+      </ul></div>
+    </div>
+    <div class="fbot">
+      <div class="fcopy">© 2025 زين AI · جميع الأدوات تعمل داخل المتصفح</div>
+      <div class="ftags"><span class="ftag">AI</span><span class="ftag">عربي</span><span class="ftag">مجاني</span><span class="ftag">Gemini</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="overlay" id="authOv">
+  <div class="modal">
+    <button class="mod-x" onclick="closeOv('authOv')">✕</button>
+    <div style="text-align:center;margin-bottom:1.2rem"><div style="font-size:2.5rem">👋</div><h2 class="m-ttl" style="margin-top:.5rem">أهلاً بك في زين AI</h2></div>
+    <div class="auth-tabs"><button class="a-tab on" id="lt" onclick="swAuth('login')">دخول</button><button class="a-tab" id="st" onclick="swAuth('signup')">حساب جديد</button></div>
+    <div class="auth-err" id="authErr"></div>
+    <div id="lf">
+      <div class="fg"><label class="fl">البريد</label><input type="email" class="fi" id="le" placeholder="example@email.com"></div>
+      <div class="fg"><label class="fl">كلمة المرور</label><input type="password" class="fi" id="lp" placeholder="••••••••"></div>
+      <button class="btn-p" onclick="doLogin()">دخول →</button>
+    </div>
+    <div id="sf" style="display:none">
+      <div class="fg"><label class="fl">الاسم</label><input type="text" class="fi" id="sn" placeholder="اسمك"></div>
+      <div class="fg"><label class="fl">البريد</label><input type="email" class="fi" id="se" placeholder="example@email.com"></div>
+      <div class="fg"><label class="fl">كلمة المرور</label><input type="password" class="fi" id="sp" placeholder="8 أحرف على الأقل"></div>
+      <button class="btn-p" onclick="doSignup()">إنشاء حساب مجاني →</button>
+    </div>
+    <div class="soc-row">
+      <button class="soc-btn" onclick="showNotif('قريباً!')">🔵 Google</button>
+      <button class="soc-btn" onclick="showNotif('قريباً!')">⚫ Apple</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL MODAL -->
+<div class="overlay" id="toolOv">
+  <div class="modal"><button class="mod-x" onclick="closeOv('toolOv')">✕</button><div id="toolBody"></div></div>
+</div>
+
+<div class="notif" id="notif"><span id="notifTxt"></span></div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// ===== KEY MANAGEMENT =====
+const getKey=()=>localStorage.getItem('zk')||'';
+const setKey=k=>{localStorage.setItem('zk',k.trim());showNotif('✅ تم حفظ المفتاح! الأدوات جاهزة');};
+
+function keyBanner(){
+  return `<div class="key-banner">
+    <div class="ki">🔑</div>
+    <div class="kt">
+      <strong>مفتاح Gemini API مطلوب لهذه الأداة</strong>
+      <p>مجاني من <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--g2);font-weight:600">Google AI Studio</a> — يُحفظ مرة واحدة فقط</p>
+      <div class="key-inp-row">
+        <input class="key-inp" id="keyInp" type="password" placeholder="AIzaSy..." value="${getKey()}">
+        <button class="key-save" onclick="setKey(document.getElementById('keyInp').value)">حفظ</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ===== GEMINI =====
+async function callAI(sys,user){
+  const k=getKey();
+  if(!k)throw new Error('أضف مفتاح Gemini أولاً من الأعلى 🔑');
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${k}`,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({contents:[{parts:[{text:sys+'\n\n'+user}]}],generationConfig:{maxOutputTokens:1500,temperature:0.7}})
+  });
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||'خطأ في الاتصال');}
+  const d=await r.json();
+  return d.candidates?.[0]?.content?.parts?.[0]?.text||'';
+}
+
+// ===== FAVS =====
+let FAVS=JSON.parse(localStorage.getItem('zfavs')||'[]');
+const saveFavs=()=>localStorage.setItem('zfavs',JSON.stringify(FAVS));
+
+// ===== TOOLS =====
+const T=[
+  // FILES — تعمل بدون API
+  {id:'bgremove',cat:'files',icon:'✂️',clr:'#EF4444',name:'إزالة الخلفية',desc:'احذف خلفية الصور داخل المتصفح',badge:'بدون API',bc:'bf',uses:'20K',type:'bgremove'},
+  {id:'photoedit',cat:'files',icon:'🖼️',clr:'#10B981',name:'تعديل الصور',desc:'فلاتر وتحسين احترافي',badge:'بدون API',bc:'bf',uses:'6K',type:'photoedit'},
+  {id:'compress',cat:'files',icon:'🗜️',clr:'#8B5CF6',name:'ضغط الصور',desc:'قلّل حجم الصور بجودة عالية',badge:'بدون API',bc:'bf',uses:'15K',type:'compress'},
+  {id:'imgconvert',cat:'files',icon:'🔄',clr:'#3B82F6',name:'تحويل صيغ الصور',desc:'JPG↔PNG↔WEBP بنقرة',badge:'بدون API',bc:'bw',uses:'8K',type:'imgconvert'},
+  {id:'pdf',cat:'files',icon:'📋',clr:'#F59E0B',name:'أدوات PDF',desc:'اقرأ وحلّل واستخرج نص PDF',badge:'بدون API',bc:'bf',uses:'22K',type:'pdf'},
+  {id:'speech',cat:'files',icon:'🎤',clr:'#EF4444',name:'صوت إلى نص',desc:'تحويل فوري بالميكروفون',badge:'بدون API',bc:'bf',uses:'5K',type:'speech'},
+  {id:'textfile',cat:'files',icon:'📝',clr:'#10B981',name:'نص إلى PDF',desc:'حوّل أي نص لملف PDF',badge:'بدون API',bc:'bf',uses:'5K',type:'textfile'},
+  {id:'colorpicker',cat:'files',icon:'🎨',clr:'#F59E0B',name:'منتقي الألوان',desc:'استخرج ألوان من أي صورة',badge:'بدون API',bc:'bf',uses:'4K',type:'colorpicker'},
+  // AI TOOLS
+  {id:'summarize',cat:'ai',icon:'📄',clr:'#8B5CF6',name:'تلخيص النصوص',desc:'لخّص أي نص بذكاء',badge:'Gemini AI',bc:'bn',uses:'12K',type:'ai',ph:'الصق النص هنا...',sys:'لخّص النص التالي بالعربية: 1) ملخص عام 2-3 جمل 2) أبرز النقاط كقائمة.'},
+  {id:'cv',cat:'work',icon:'💼',clr:'#10B981',name:'إنشاء CV',desc:'سيرة ذاتية احترافية',badge:'Gemini AI',bc:'bn',uses:'8K',type:'ai',ph:'اسمك، خبرتك، مهاراتك...',sys:'أنشئ CV كاملاً بالعربية: ملخص شخصي، خبرات، مهارات، تعليم، إنجازات.'},
+  {id:'translate',cat:'ai',icon:'🌐',clr:'#EF4444',name:'ترجمة ذكية',desc:'ترجم بين 50+ لغة',badge:'Gemini AI',bc:'bn',uses:'25K',type:'ai',ph:'النص + اللغة المطلوبة...',sys:'ترجم النص بدقة. إذا لم تُحدد اللغة: عربي↔إنجليزي.'},
+  {id:'study',cat:'study',icon:'📚',clr:'#8B5CF6',name:'مساعد الدراسة',desc:'شرح وملخصات وأسئلة',badge:'Gemini AI',bc:'bn',uses:'18K',type:'ai',ph:'اسألني عن أي مادة...',sys:'أنت مدرس ذكي. أجب بوضوح مع أمثلة. أضف 3 أسئلة مراجعة.'},
+  {id:'content',cat:'work',icon:'✍️',clr:'#8B5CF6',name:'كتابة المحتوى',desc:'مقالات وسوشيال ميديا',badge:'Gemini AI',bc:'bn',uses:'13K',type:'ai',ph:'نوع المحتوى والموضوع...',sys:'أنت كاتب محتوى عربي محترف. اكتب محتوى جذاباً وعالي الجودة.'},
+  {id:'assistant',cat:'ai',icon:'🤖',clr:'#EF4444',name:'المساعد الشخصي',desc:'مساعدك الذكي',badge:'Gemini AI',bc:'bn',uses:'30K',type:'ai',ph:'اسألني أي شيء...',sys:'أنت مساعد ذكي وودود. أجب بدقة بالعربية.'},
+  {id:'tasks',cat:'ai',icon:'✅',clr:'#10B981',name:'منظم المهام',desc:'رتّب مهامك بالـ AI',badge:'Gemini AI',bc:'bn',uses:'7K',type:'ai',ph:'مهامك اليوم أو الأسبوع...',sys:'خبير إدارة وقت. نظّم المهام علمياً وقدّم جدولاً واضحاً.'},
+  {id:'fitness',cat:'health',icon:'🏃',clr:'#EF4444',name:'خطة رياضية',desc:'برنامج تمرين مخصص',badge:'Gemini AI',bc:'bn',uses:'9K',type:'ai',ph:'هدفك الرياضي ومستواك...',sys:'مدرب رياضي خبير. ضع خطة تمرين أسبوعية تفصيلية.'},
+  {id:'diet',cat:'health',icon:'🥗',clr:'#10B981',name:'خطة غذائية',desc:'نظام غذائي مخصص',badge:'Gemini AI',bc:'bn',uses:'11K',type:'ai',ph:'هدفك ووزنك وطولك...',sys:'خبير تغذية. ضع خطة غذائية أسبوعية كاملة مع السعرات.'},
+  {id:'grammar',cat:'study',icon:'✒️',clr:'#EF4444',name:'تصحيح اللغة',desc:'صحّح نصوصك',badge:'Gemini AI',bc:'bn',uses:'14K',type:'ai',ph:'الصق النص للتصحيح...',sys:'أستاذ لغة. صحّح الأخطاء وقدّم النص المُصحَّح مع شرح الأخطاء.'},
+  {id:'idea',cat:'ai',icon:'💡',clr:'#F59E0B',name:'توليد الأفكار',desc:'أفكار إبداعية',badge:'Gemini AI',bc:'bn',uses:'11K',type:'ai',ph:'مجالك وما تحتاج أفكاراً فيه...',sys:'مستشار إبداعي. قدّم 8-10 أفكار مبتكرة مع شرح وكيفية التطبيق.'},
+  {id:'interview',cat:'work',icon:'🎯',clr:'#8B5CF6',name:'التحضير للمقابلات',desc:'أسئلة وإجابات',badge:'Gemini AI',bc:'bn',uses:'6K',type:'ai',ph:'الوظيفة وخبرتك...',sys:'مدرب مقابلات. قدّم أبرز الأسئلة مع نماذج إجابات مثالية.'},
+  {id:'email',cat:'work',icon:'📧',clr:'#10B981',name:'كتابة الرسائل',desc:'رسائل مهنية',badge:'Gemini AI',bc:'bn',uses:'9K',type:'ai',ph:'موضوع الرسالة والمستلم...',sys:'متخصص تواصل مهني. اكتب رسالة احترافية واضحة مع عنوان مناسب.'},
+  {id:'freelance',cat:'work',icon:'💰',clr:'#8B5CF6',name:'نصائح الفريلانس',desc:'أدوات الربح والعمل الحر',badge:'Gemini AI',bc:'bn',uses:'10K',type:'ai',ph:'مهاراتك وما تريد تحقيقه...',sys:'مستشار عمل حر. ساعد في بناء المسار المهني وإيجاد فرص الربح بخطوات عملية.'},
+];
+
+// ===== RENDER =====
+function renderTools(list){
+  document.getElementById('toolsGrid').innerHTML=(list||T).map(t=>`
+    <div class="tc rv" onclick="openTool('${t.id}')">
+      <span class="tc-badge ${t.bc}">${t.badge}</span>
+      <div class="tc-ico" style="background:${t.clr}20;color:${t.clr}">${t.icon}</div>
+      <div class="tc-name">${t.name}</div>
+      <div class="tc-desc">${t.desc}</div>
+      <div class="tc-foot">
+        <div class="tc-uses">👥 ${t.uses}</div>
+        <button class="fav-btn ${FAVS.includes(t.id)?'on':''}" onclick="event.stopPropagation();toggleFav(this,'${t.id}')">${FAVS.includes(t.id)?'❤️':'♡'}</button>
+      </div>
+    </div>`).join('');
+  setTimeout(revealAll,80);
+}
+renderTools();
+function filterCat(c,b){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));b.classList.add('on');renderTools(c==='all'?T:T.filter(t=>t.cat===c));}
+function filterTools(q){if(!q.trim()){renderTools();return;}const s=q.toLowerCase();renderTools(T.filter(t=>t.name.includes(s)||t.desc.includes(s)));}
+
+// ===== OPEN TOOL =====
+function openTool(id){
+  const t=T.find(x=>x.id===id);if(!t)return;
+  const b=document.getElementById('toolBody');
+
+  if(t.type==='ai'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:${t.clr}20;color:${t.clr}">${t.icon}</div>
+      <h2 class="m-ttl">${t.name}</h2>
+      <p class="m-dsc">${t.desc}</p>
+      ${keyBanner()}
+      <textarea class="m-ta" id="ti" placeholder="${t.ph}"></textarea>
+      <button class="btn-p" id="rb" onclick="runAI('${id}')">✨ تحليل بالذكاء الاصطناعي</button>
+      <div class="m-load" id="al"><div class="spin"></div><span>جارٍ التحليل...</span></div>
+      <div class="m-res" id="ar"></div>
+      <div class="m-err" id="ae"></div>`;
+
+  }else if(t.type==='bgremove'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#EF444420;color:#EF4444">✂️</div>
+      <h2 class="m-ttl">إزالة الخلفية</h2>
+      <p class="m-dsc">ارفع صورة واحذف خلفيتها داخل المتصفح مباشرة</p>
+      <div class="drop-zone" onclick="document.getElementById('bgf').click()">
+        <div class="drop-icon">🖼️</div><div class="drop-txt">انقر أو اسحب صورة</div><div class="drop-sub">PNG · JPG · WEBP</div>
+      </div>
+      <input type="file" id="bgf" accept="image/*" style="display:none" onchange="bgLoad(this)">
+      <div id="bgWrap" style="display:none">
+        <div class="canvas-wrap"><img id="bgOrig" style="max-height:200px;border-radius:12px;border:1px solid var(--brd)"></div>
+        <div style="margin:.8rem 0">
+          <label style="font-size:12.5px;color:var(--tx2);display:block;margin-bottom:5px">حساسية إزالة الخلفية</label>
+          <input type="range" min="10" max="100" value="35" id="bgTh" style="width:100%">
+          <small style="font-size:11px;color:var(--tx3)">كلما زادت القيمة كلما أزلت أكثر</small>
+        </div>
+        <button class="btn-g" onclick="doBgRemove()">✂️ احذف الخلفية الآن</button>
+        <div id="bgRes" style="display:none;margin-top:1rem">
+          <p style="font-size:13px;color:var(--g2);margin-bottom:.5rem">✅ تمت إزالة الخلفية!</p>
+          <div class="canvas-wrap"><canvas id="bgOut"></canvas></div>
+          <button class="btn-dl" style="margin-top:.7rem" onclick="dlCanvas('bgOut','no-bg.png')">⬇️ تحميل PNG</button>
+        </div>
+      </div>`;
+
+  }else if(t.type==='photoedit'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#10B98120;color:#10B981">🖼️</div>
+      <h2 class="m-ttl">تعديل الصور</h2>
+      <p class="m-dsc">فلاتر وتعديلات احترافية تعمل مباشرة في المتصفح</p>
+      <div class="drop-zone" id="editDrop" onclick="document.getElementById('ef').click()">
+        <div class="drop-icon">📸</div><div class="drop-txt">انقر لرفع صورة</div><div class="drop-sub">PNG · JPG · WEBP</div>
+      </div>
+      <input type="file" id="ef" accept="image/*" style="display:none" onchange="editLoad(this)">
+      <div id="editWrap" style="display:none">
+        <div class="canvas-wrap"><canvas id="ec"></canvas></div>
+        <div style="margin-top:1rem">
+          <div class="slider-group"><div class="slider-lbl"><span>السطوع</span><span id="bv">100</span></div><input type="range" min="0" max="200" value="100" id="sb" oninput="applyEdit()"></div>
+          <div class="slider-group"><div class="slider-lbl"><span>التباين</span><span id="cv">100</span></div><input type="range" min="0" max="200" value="100" id="sc" oninput="applyEdit()"></div>
+          <div class="slider-group"><div class="slider-lbl"><span>التشبع</span><span id="sv">100</span></div><input type="range" min="0" max="200" value="100" id="ss" oninput="applyEdit()"></div>
+          <div class="slider-group"><div class="slider-lbl"><span>التمويه</span><span id="blv">0</span></div><input type="range" min="0" max="10" value="0" step="0.5" id="sbl" oninput="applyEdit()"></div>
+          <div class="slider-group"><div class="slider-lbl"><span>الدوران</span><span id="rv2">0°</span></div><input type="range" min="0" max="360" value="0" id="sr" oninput="applyEdit()"></div>
+        </div>
+        <div class="tag-row">
+          <button class="btn-sm" onclick="preset('normal')">عادي</button>
+          <button class="btn-sm" onclick="preset('bw')">أبيض وأسود</button>
+          <button class="btn-sm" onclick="preset('warm')">دافئ</button>
+          <button class="btn-sm" onclick="preset('cool')">بارد</button>
+          <button class="btn-sm" onclick="preset('vivid')">حيوي</button>
+          <button class="btn-sm" onclick="preset('fade')">باهت</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:.8rem;flex-wrap:wrap">
+          <button class="btn-dl" onclick="dlCanvas('ec','edited.png')">⬇️ تحميل PNG</button>
+          <button class="btn-dl" onclick="dlCanvasJPG('ec','edited.jpg')" style="background:linear-gradient(135deg,var(--g),#059669)">⬇️ تحميل JPG</button>
+        </div>
+      </div>`;
+
+  }else if(t.type==='compress'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#8B5CF620;color:#8B5CF6">🗜️</div>
+      <h2 class="m-ttl">ضغط الصور</h2>
+      <p class="m-dsc">قلّل حجم الصورة مع الحفاظ على الجودة</p>
+      <div class="drop-zone" onclick="document.getElementById('cpf').click()">
+        <div class="drop-icon">🗜️</div><div class="drop-txt">انقر لرفع صورة</div><div class="drop-sub">JPG · PNG · WEBP</div>
+      </div>
+      <input type="file" id="cpf" accept="image/*" style="display:none" onchange="compLoad(this)">
+      <div id="cpWrap" style="display:none">
+        <div class="canvas-wrap"><canvas id="cpc"></canvas></div>
+        <div id="cpInfo" style="font-size:12px;color:var(--tx2);margin:.5rem 0"></div>
+        <div class="slider-group"><div class="slider-lbl"><span>جودة الضغط</span><span id="qv">80%</span></div><input type="range" min="10" max="100" value="80" id="sq" oninput="document.getElementById('qv').textContent=this.value+'%'"></div>
+        <button class="btn-g" onclick="doCompress()">🗜️ اضغط الآن</button>
+        <div id="cpRes" style="margin-top:.8rem"></div>
+      </div>`;
+
+  }else if(t.type==='imgconvert'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#3B82F620;color:#3B82F6">🔄</div>
+      <h2 class="m-ttl">تحويل صيغ الصور</h2>
+      <p class="m-dsc">حوّل بين JPG وPNG وWEBP فوراً</p>
+      <div class="drop-zone" onclick="document.getElementById('cvf').click()">
+        <div class="drop-icon">🔄</div><div class="drop-txt">انقر لرفع صورة</div><div class="drop-sub">JPG · PNG · WEBP · GIF</div>
+      </div>
+      <input type="file" id="cvf" accept="image/*" style="display:none" onchange="cvLoad(this)">
+      <div id="cvWrap" style="display:none">
+        <div class="canvas-wrap"><img id="cvImg" style="max-height:180px;border-radius:12px;border:1px solid var(--brd)"></div>
+        <div style="margin-top:1rem">
+          <label class="fl">تحويل إلى</label>
+          <select class="fi" id="cvFmt">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+          </select>
+        </div>
+        <canvas id="cvc" style="display:none"></canvas>
+        <button class="btn-g" style="margin-top:.9rem" onclick="doConvert()">🔄 تحويل الآن</button>
+        <div id="cvRes" style="margin-top:.8rem"></div>
+      </div>`;
+
+  }else if(t.type==='pdf'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#F59E0B20;color:#F59E0B">📋</div>
+      <h2 class="m-ttl">أدوات PDF</h2>
+      <p class="m-dsc">اقرأ وحلّل واستخرج النص وحوّل PDF لصور</p>
+      <div class="drop-zone" onclick="document.getElementById('pdff').click()">
+        <div class="drop-icon">📋</div><div class="drop-txt">انقر لرفع ملف PDF</div><div class="drop-sub">PDF فقط</div>
+      </div>
+      <input type="file" id="pdff" accept=".pdf" style="display:none" onchange="pdfLoad(this)">
+      <div class="m-load" id="pdfL"><div class="spin"></div><span>جارٍ القراءة...</span></div>
+      <div id="pdfWrap" style="display:none">
+        <div id="pdfInfo" style="background:rgba(255,255,255,.03);border:1px solid var(--brd);border-radius:12px;padding:10px 14px;font-size:13px;margin-bottom:.8rem"></div>
+        <div class="tag-row">
+          <button class="btn-sm" onclick="pdfText2()">📝 استخراج النص</button>
+          <button class="btn-sm" onclick="pdfImages()">🖼️ تحويل لصور</button>
+          <button class="btn-sm" onclick="pdfSum()">🤖 تلخيص بالـ AI</button>
+        </div>
+        <div id="pdfOut" class="result-box" style="display:none;margin-top:.8rem"></div>
+        <div id="pdfPages" style="margin-top:.8rem"></div>
+        <div id="pdfDl" style="margin-top:.8rem"></div>
+      </div>`;
+
+  }else if(t.type==='speech'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#EF444420;color:#EF4444">🎤</div>
+      <h2 class="m-ttl">صوت إلى نص</h2>
+      <p class="m-dsc">تحدث والموقع يحوّل كلامك لنص فوراً — يعمل على Chrome وEdge</p>
+      <div style="text-align:center;padding:.5rem 0">
+        <p id="spSt" style="font-size:13px;color:var(--tx2);margin-bottom:.5rem">اضغط الزر وابدأ الكلام</p>
+        <button class="speech-btn" id="spBtn" onclick="toggleSp()">🎤</button>
+      </div>
+      <div class="fg" style="margin-bottom:.8rem">
+        <label class="fl">اللغة</label>
+        <select id="spLang" class="fi">
+          <option value="ar-SA">العربية</option>
+          <option value="en-US">English</option>
+          <option value="fr-FR">Français</option>
+          <option value="tr-TR">Türkçe</option>
+          <option value="de-DE">Deutsch</option>
+        </select>
+      </div>
+      <div id="spRes" class="result-box" style="min-height:100px;margin-bottom:.8rem"></div>
+      <div class="tag-row">
+        <button class="btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('spRes').textContent);showNotif('تم النسخ ✅')">📋 نسخ</button>
+        <button class="btn-sm" onclick="document.getElementById('spRes').textContent='';spFinal=''">🗑️ مسح</button>
+        <button class="btn-sm" onclick="dlText(document.getElementById('spRes').textContent,'transcription.txt')">⬇️ تحميل</button>
+      </div>`;
+    initSp();
+
+  }else if(t.type==='textfile'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#10B98120;color:#10B981">📝</div>
+      <h2 class="m-ttl">نص إلى PDF</h2>
+      <p class="m-dsc">اكتب نصاً وحمّله كـ TXT أو PDF</p>
+      <textarea class="m-ta" id="txtI" placeholder="اكتب نصك هنا..." style="min-height:180px"></textarea>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-p" style="flex:1" onclick="dlText(document.getElementById('txtI').value,'document.txt')">⬇️ تحميل TXT</button>
+        <button class="btn-g" style="flex:1" onclick="txt2pdf()">📄 تحميل PDF</button>
+      </div>`;
+
+  }else if(t.type==='colorpicker'){
+    b.innerHTML=`
+      <div class="m-ico" style="background:#F59E0B20;color:#F59E0B">🎨</div>
+      <h2 class="m-ttl">منتقي الألوان</h2>
+      <p class="m-dsc">ارفع صورة واستخرج أبرز الألوان منها</p>
+      <div class="drop-zone" onclick="document.getElementById('clf').click()">
+        <div class="drop-icon">🎨</div><div class="drop-txt">انقر لرفع صورة</div><div class="drop-sub">PNG · JPG · WEBP</div>
+      </div>
+      <input type="file" id="clf" accept="image/*" style="display:none" onchange="colorLoad(this)">
+      <canvas id="clc" style="display:none"></canvas>
+      <div id="clWrap" style="display:none">
+        <div class="canvas-wrap"><img id="clImg" style="max-height:180px;border-radius:12px;border:1px solid var(--brd)"></div>
+        <button class="btn-g" style="margin-top:.8rem" onclick="extractColors()">🎨 استخرج الألوان</button>
+        <div id="clRes" style="margin-top:.8rem"></div>
+      </div>`;
+  }
+
+  document.getElementById('toolOv').classList.add('open');
+}
+
+// ===== AI RUN =====
+async function runAI(id){
+  const t=T.find(x=>x.id===id);
+  const inp=document.getElementById('ti').value.trim();
+  if(!inp){showNotif('اكتب نصاً أولاً ✏️');return;}
+  const rb=document.getElementById('rb'),al=document.getElementById('al'),ar=document.getElementById('ar'),ae=document.getElementById('ae');
+  rb.disabled=true;al.classList.add('show');ar.classList.remove('show');ae.classList.remove('show');
+  try{
+    const tx=await callAI(t.sys,inp);
+    ar.innerHTML=tx.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+    ar.classList.add('show');
+    const cb=document.createElement('button');cb.className='btn-sm';cb.style.marginTop='.7rem';cb.textContent='📋 نسخ النتيجة';
+    cb.onclick=()=>{navigator.clipboard.writeText(tx);showNotif('تم النسخ ✅');};
+    ar.appendChild(document.createElement('br'));ar.appendChild(cb);
+  }catch(e){ae.innerHTML='⚠️ '+e.message;ae.classList.add('show');}
+  finally{rb.disabled=false;al.classList.remove('show');}
+}
+
+// ===== BG REMOVE =====
+let bgI=null;
+function bgLoad(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const img=document.getElementById('bgOrig');
+    img.onload=()=>{bgI=img;document.getElementById('bgWrap').style.display='block';};
+    img.src=e.target.result;
+  };r.readAsDataURL(f);
+}
+function doBgRemove(){
+  if(!bgI)return;
+  const th=parseInt(document.getElementById('bgTh').value);
+  const out=document.getElementById('bgOut');
+  out.width=bgI.naturalWidth;out.height=bgI.naturalHeight;
+  const ctx=out.getContext('2d');
+  ctx.drawImage(bgI,0,0);
+  const d=ctx.getImageData(0,0,out.width,out.height);
+  const px=d.data;
+  // Sample background color from corners
+  const corners=[[0,0],[out.width-1,0],[0,out.height-1],[out.width-1,out.height-1]];
+  let bR=0,bG=0,bB=0;
+  corners.forEach(([x,y])=>{const i=(y*out.width+x)*4;bR+=px[i];bG+=px[i+1];bB+=px[i+2];});
+  bR=Math.round(bR/4);bG=Math.round(bG/4);bB=Math.round(bB/4);
+  for(let i=0;i<px.length;i+=4){
+    const diff=Math.abs(px[i]-bR)+Math.abs(px[i+1]-bG)+Math.abs(px[i+2]-bB);
+    if(diff<th*3)px[i+3]=0;
+  }
+  ctx.putImageData(d,0,0);
+  out.style.maxWidth='100%';out.style.maxHeight='220px';out.style.borderRadius='12px';out.style.border='1px solid var(--brd)';
+  document.getElementById('bgRes').style.display='block';
+  showNotif('✅ تمت إزالة الخلفية!');
+}
+
+// ===== PHOTO EDIT =====
+let editI=null;
+function editLoad(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const c=document.getElementById('ec'),ctx=c.getContext('2d');
+      const mW=580,mH=380;let w=img.width,h=img.height;
+      if(w>mW){h=h*(mW/w);w=mW;}if(h>mH){w=w*(mH/h);h=mH;}
+      c.width=Math.round(w);c.height=Math.round(h);
+      ctx.drawImage(img,0,0,c.width,c.height);
+      editI=img;
+      document.getElementById('editWrap').style.display='block';
+      document.getElementById('editDrop').style.display='none';
+    };img.src=e.target.result;
+  };r.readAsDataURL(f);
+}
+function applyEdit(){
+  if(!editI)return;
+  const c=document.getElementById('ec'),ctx=c.getContext('2d');
+  const b=document.getElementById('sb').value,co=document.getElementById('sc').value,
+        s=document.getElementById('ss').value,bl=document.getElementById('sbl').value,
+        rot=document.getElementById('sr').value;
+  document.getElementById('bv').textContent=b;document.getElementById('cv').textContent=co;
+  document.getElementById('sv').textContent=s;document.getElementById('blv').textContent=bl;
+  document.getElementById('rv2').textContent=rot+'°';
+  ctx.save();ctx.clearRect(0,0,c.width,c.height);
+  ctx.filter=`brightness(${b}%) contrast(${co}%) saturate(${s}%) blur(${bl}px)`;
+  if(rot!=0){
+    ctx.translate(c.width/2,c.height/2);
+    ctx.rotate(rot*Math.PI/180);
+    ctx.drawImage(editI,-c.width/2,-c.height/2,c.width,c.height);
+  }else{ctx.drawImage(editI,0,0,c.width,c.height);}
+  ctx.restore();
+}
+function preset(p){
+  const ps={normal:[100,100,100,0,0],bw:[100,100,0,0,0],warm:[110,105,130,0,0],cool:[90,100,75,0,0],vivid:[110,135,165,0,0],fade:[88,68,55,0,0]};
+  const[b,c,s,bl,r]=ps[p]||ps.normal;
+  document.getElementById('sb').value=b;document.getElementById('sc').value=c;
+  document.getElementById('ss').value=s;document.getElementById('sbl').value=bl;
+  document.getElementById('sr').value=r||0;
+  applyEdit();
+}
+
+// ===== COMPRESS =====
+let cpOrig=0,cpImg=null;
+function compLoad(inp){
+  const f=inp.files[0];if(!f)return;
+  cpOrig=f.size;
+  const r=new FileReader();
+  r.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const c=document.getElementById('cpc'),ctx=c.getContext('2d');
+      c.width=img.width;c.height=img.height;
+      ctx.drawImage(img,0,0);
+      c.style.maxWidth='100%';c.style.maxHeight='200px';c.style.borderRadius='12px';c.style.border='1px solid var(--brd)';
+      cpImg=img;
+      document.getElementById('cpWrap').style.display='block';
+      document.getElementById('cpInfo').textContent=`الحجم الأصلي: ${fmtSz(cpOrig)}`;
+    };img.src=e.target.result;
+  };r.readAsDataURL(f);
+}
+function doCompress(){
+  if(!cpImg)return;
+  const q=document.getElementById('sq').value/100;
+  const c=document.getElementById('cpc');
+  const url=c.toDataURL('image/jpeg',q);
+  const bytes=Math.round((url.length-22)*3/4);
+  const sav=Math.max(0,Math.round((1-bytes/cpOrig)*100));
+  const res=document.getElementById('cpRes');
+  res.innerHTML=`<div style="background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:.9rem;font-size:13px;margin-bottom:.7rem">
+    ✅ تم الضغط! الحجم الجديد: <strong>${fmtSz(bytes)}</strong> — وفّرت <strong>${sav}%</strong></div>`;
+  const btn=document.createElement('button');btn.className='btn-dl';btn.textContent='⬇️ تحميل الصورة المضغوطة';
+  btn.onclick=()=>{const a=document.createElement('a');a.href=url;a.download='compressed.jpg';a.click();};
+  res.appendChild(btn);
+  showNotif(`✅ وفّرت ${sav}% من الحجم!`);
+}
+function fmtSz(b){return b>1048576?`${(b/1048576).toFixed(1)} MB`:b>1024?`${Math.round(b/1024)} KB`:`${b} B`;}
+
+// ===== IMG CONVERT =====
+function cvLoad(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    document.getElementById('cvImg').src=e.target.result;
+    document.getElementById('cvWrap').style.display='block';
+  };r.readAsDataURL(f);
+}
+function doConvert(){
+  const img=document.getElementById('cvImg');
+  const fmt=document.getElementById('cvFmt').value;
+  const ext=fmt.split('/')[1];
+  const c=document.getElementById('cvc');
+  c.width=img.naturalWidth||400;c.height=img.naturalHeight||300;
+  c.getContext('2d').drawImage(img,0,0);
+  const url=c.toDataURL(fmt,.92);
+  const res=document.getElementById('cvRes');
+  const btn=document.createElement('button');btn.className='btn-dl';
+  btn.textContent=`⬇️ تحميل ${ext.toUpperCase()}`;
+  btn.onclick=()=>{const a=document.createElement('a');a.href=url;a.download=`converted.${ext}`;a.click();};
+  res.innerHTML='';res.appendChild(btn);
+  showNotif(`✅ تم التحويل إلى ${ext.toUpperCase()}`);
+}
+
+// ===== PDF =====
+let pdfDoc=null,pdfExtracted='';
+async function pdfLoad(inp){
+  const f=inp.files[0];if(!f)return;
+  document.getElementById('pdfL').classList.add('show');
+  try{
+    const buf=await f.arrayBuffer();
+    pdfDoc=await pdfjsLib.getDocument({data:buf}).promise;
+    document.getElementById('pdfInfo').innerHTML=`📋 <strong>${f.name}</strong> · ${pdfDoc.numPages} صفحة · ${fmtSz(f.size)}`;
+    document.getElementById('pdfWrap').style.display='block';
+    document.getElementById('pdfL').classList.remove('show');
+    showNotif(`✅ تم تحميل PDF (${pdfDoc.numPages} صفحة)`);
+  }catch(e){document.getElementById('pdfL').classList.remove('show');showNotif('خطأ في قراءة الملف');}
+}
+async function pdfText2(){
+  if(!pdfDoc)return;
+  const out=document.getElementById('pdfOut');
+  out.style.display='block';out.textContent='جارٍ الاستخراج...';
+  pdfExtracted='';
+  for(let i=1;i<=pdfDoc.numPages;i++){
+    const p=await pdfDoc.getPage(i);
+    const c=await p.getTextContent();
+    pdfExtracted+=`\n--- صفحة ${i} ---\n`+c.items.map(x=>x.str).join(' ');
+  }
+  out.textContent=pdfExtracted||'لم يُعثر على نص (قد يكون الملف صوراً)';
+  const dl=document.getElementById('pdfDl');dl.innerHTML='';
+  const btn=document.createElement('button');btn.className='btn-dl';btn.textContent='⬇️ تحميل النص';
+  btn.onclick=()=>dlText(pdfExtracted,'extracted.txt');
+  dl.appendChild(btn);
+}
+async function pdfImages(){
+  if(!pdfDoc)return;
+  const pages=document.getElementById('pdfPages');
+  pages.innerHTML='<p style="font-size:13px;color:var(--tx2)">جارٍ التحويل...</p>';
+  for(let i=1;i<=Math.min(pdfDoc.numPages,6);i++){
+    const pg=await pdfDoc.getPage(i);
+    const vp=pg.getViewport({scale:1.4});
+    const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
+    await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+    c.style.maxWidth='100%';c.style.borderRadius='8px';c.style.border='1px solid var(--brd)';c.style.display='block';c.style.marginBottom='4px';
+    const btn=document.createElement('button');btn.className='btn-dl';btn.style.margin='0 0 10px';
+    btn.textContent=`⬇️ صفحة ${i}`;
+    btn.onclick=(()=>{const cc=c;return()=>{const a=document.createElement('a');a.href=cc.toDataURL('image/png');a.download=`page${i}.png`;a.click();}})();
+    if(i===1)pages.innerHTML='';
+    pages.appendChild(c);pages.appendChild(btn);
+  }
+  if(pdfDoc.numPages>6)pages.innerHTML+='<p style="font-size:11px;color:var(--tx3)">* يُعرض أول 6 صفحات</p>';
+}
+async function pdfSum(){
+  if(!pdfDoc)return;
+  if(!pdfExtracted)await pdfText2();
+  if(!pdfExtracted.trim()){showNotif('لا يوجد نص');return;}
+  const out=document.getElementById('pdfOut');
+  out.style.display='block';out.textContent='جارٍ التلخيص...';
+  try{const s=await callAI('لخّص هذا النص بالعربية بشكل واضح ومنظم',pdfExtracted.slice(0,3000));out.textContent=s;}
+  catch(e){out.textContent='خطأ: '+e.message;}
+}
+
+// ===== SPEECH =====
+let spRec=null,spOn=false,spFinal='';
+function initSp(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){document.getElementById('spSt').textContent='⚠️ يحتاج Chrome أو Edge';return;}
+  spRec=new SR();spRec.continuous=true;spRec.interimResults=true;
+  spRec.onresult=e=>{
+    let interim='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(e.results[i].isFinal)spFinal+=e.results[i][0].transcript+' ';
+      else interim+=e.results[i][0].transcript;
+    }
+    const el=document.getElementById('spRes');if(el)el.textContent=spFinal+interim;
+  };
+  spRec.onend=()=>{if(spOn&&spRec)spRec.start();};
+  spRec.onerror=e=>{showNotif('خطأ: '+e.error);stopSp();};
+}
+function toggleSp(){spOn?stopSp():startSp();}
+function startSp(){
+  if(!spRec){showNotif('يحتاج Chrome أو Edge');return;}
+  spRec.lang=document.getElementById('spLang').value;
+  spFinal='';spRec.start();spOn=true;
+  const btn=document.getElementById('spBtn');if(btn){btn.classList.add('rec');btn.textContent='⏹️';}
+  const st=document.getElementById('spSt');if(st)st.textContent='🔴 جارٍ التسجيل...';
+}
+function stopSp(){
+  if(spRec)spRec.stop();spOn=false;
+  const btn=document.getElementById('spBtn');if(btn){btn.classList.remove('rec');btn.textContent='🎤';}
+  const st=document.getElementById('spSt');if(st)st.textContent='توقف التسجيل — اضغط مجدداً للمتابعة';
+}
+
+// ===== COLOR PICKER =====
+function colorLoad(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const img=document.getElementById('clImg');
+    img.src=e.target.result;
+    document.getElementById('clWrap').style.display='block';
+  };r.readAsDataURL(f);
+}
+function extractColors(){
+  const img=document.getElementById('clImg');
+  const c=document.getElementById('clc');
+  const mW=200,mH=200;let w=img.naturalWidth||200,h=img.naturalHeight||200;
+  if(w>mW){h=Math.round(h*(mW/w));w=mW;}
+  c.width=w;c.height=h;
+  const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
+  const d=ctx.getImageData(0,0,w,h).data;
+  const colorMap={};
+  for(let i=0;i<d.length;i+=16){
+    const r=Math.round(d[i]/32)*32,g=Math.round(d[i+1]/32)*32,b=Math.round(d[i+2]/32)*32;
+    const k=`${r},${g},${b}`;colorMap[k]=(colorMap[k]||0)+1;
+  }
+  const top=Object.entries(colorMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  const res=document.getElementById('clRes');
+  res.innerHTML='<p style="font-size:13px;color:var(--tx2);margin-bottom:.7rem">أبرز الألوان في الصورة:</p><div style="display:flex;flex-wrap:wrap;gap:8px">';
+  top.forEach(([k])=>{
+    const[r,g,b]=k.split(',').map(Number);
+    const hex=`#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
+    res.innerHTML+=`<div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--brd);border-radius:8px;padding:6px 10px;cursor:pointer" onclick="navigator.clipboard.writeText('${hex}');showNotif('تم نسخ ${hex} ✅')">
+      <div style="width:22px;height:22px;border-radius:5px;background:${hex};border:1px solid rgba(255,255,255,.1)"></div>
+      <span style="font-size:12px;color:var(--tx2)">${hex}</span>
+    </div>`;
+  });
+  res.innerHTML+='</div><p style="font-size:11px;color:var(--tx3);margin-top:.5rem">انقر على أي لون لنسخه</p>';
+}
+
+// ===== TXT TO PDF =====
+function txt2pdf(){
+  try{
+    const{jsPDF}=window.jspdf;
+    const doc=new jsPDF();
+    const txt=document.getElementById('txtI').value;
+    if(!txt.trim()){showNotif('اكتب نصاً أولاً');return;}
+    const lines=doc.splitTextToSize(txt,175);
+    doc.text(lines,15,20);
+    doc.save('document.pdf');
+    showNotif('✅ تم تحميل PDF');
+  }catch(e){showNotif('خطأ في إنشاء PDF: '+e.message);}
+}
+
+// ===== UTILS =====
+function dlCanvas(id,name){const a=document.createElement('a');a.href=document.getElementById(id).toDataURL('image/png');a.download=name;a.click();}
+function dlCanvasJPG(id,name){const a=document.createElement('a');a.href=document.getElementById(id).toDataURL('image/jpeg',.92);a.download=name;a.click();}
+function dlText(txt,name){const b=new Blob([txt],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();}
+
+// ===== AUTH =====
+function openAuth(t){document.getElementById('authOv').classList.add('open');swAuth(t);}
+function swAuth(t){
+  document.getElementById('lf').style.display=t==='login'?'block':'none';
+  document.getElementById('sf').style.display=t==='signup'?'block':'none';
+  document.getElementById('lt').classList.toggle('on',t==='login');
+  document.getElementById('st').classList.toggle('on',t==='signup');
+  document.getElementById('authErr').classList.remove('show');
+}
+function authErr(m){const e=document.getElementById('authErr');e.textContent=m;e.classList.add('show');}
+function doLogin(){
+  const e=document.getElementById('le').value.trim(),p=document.getElementById('lp').value;
+  if(!e||!p){authErr('تعبئة جميع الحقول مطلوبة');return;}
+  closeOv('authOv');setUser(e);
+}
+function doSignup(){
+  const n=document.getElementById('sn').value.trim(),e=document.getElementById('se').value.trim(),p=document.getElementById('sp').value;
+  if(!n||!e||!p){authErr('تعبئة جميع الحقول مطلوبة');return;}
+  if(p.length<8){authErr('كلمة المرور 8 أحرف على الأقل');return;}
+  closeOv('authOv');setUser(n);
+}
+function setUser(n){
+  document.getElementById('navEnd').innerHTML=`
+    <div class="u-wrap">
+      <div class="u-av" onclick="document.getElementById('uDD').classList.toggle('open')">${(n||'م')[0].toUpperCase()}</div>
+      <div class="u-dd" id="uDD">
+        <div class="ddi">👤 ${n}</div>
+        <div class="ddi">⭐ المفضلة (${FAVS.length})</div>
+        <div class="ddi" onclick="location.reload()">🚪 خروج</div>
+      </div>
+    </div>`;
+  showNotif(`مرحباً ${n}! 🎉`);
+}
+
+// ===== FAVORITES =====
+function toggleFav(btn,id){
+  if(FAVS.includes(id)){FAVS=FAVS.filter(x=>x!==id);btn.classList.remove('on');btn.textContent='♡';}
+  else{FAVS.push(id);btn.classList.add('on');btn.textContent='❤️';}
+  saveFavs();showNotif(FAVS.includes(id)?'تمت الإضافة ❤️':'تمت الإزالة');
+}
+
+// ===== PAGES =====
+const INFOS={
+  about:`<h1 style="font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#A78BFA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem">من نحن</h1><p style="color:#9B8EC4;line-height:1.8">زين AI منصة عربية — كل الأدوات تعمل داخل المتصفح مباشرة بدون مواقع خارجية.</p>`,
+  privacy:`<h1 style="font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#A78BFA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem">سياسة الخصوصية</h1><p style="color:#9B8EC4;line-height:1.8">لا نجمع بياناتك. الملفات تُعالج في متصفحك فقط ولا تُرسل لأي خادم.</p>`,
+  terms:`<h1 style="font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#A78BFA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem">شروط الاستخدام</h1><p style="color:#9B8EC4;line-height:1.8">الاستخدام الشخصي والتعليمي مسموح. يُمنع استخدام المنصة لأغراض ضارة.</p>`,
+  contact:`<h1 style="font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#A78BFA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem">تواصل معنا</h1><p style="color:#9B8EC4;line-height:1.8">📧 contact@zenai.app</p>`
+};
+function showInfo(p){
+  document.getElementById('mainPage').style.display='none';
+  const ip=document.getElementById('infoPage');ip.style.display='block';
+  document.getElementById('infoContent').innerHTML=INFOS[p]||'';window.scrollTo(0,0);
+}
+function goHome(){document.getElementById('mainPage').style.display='block';document.getElementById('infoPage').style.display='none';}
+function scrollTo(id){goHome();setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),100);}
+function closeOv(id){document.getElementById(id).classList.remove('open');if(id==='toolOv')stopSp();}
+function toggleNav(){
+  const nl=document.querySelector('.nav-mid');
+  nl.style.cssText=nl.style.position==='absolute'?'':'display:flex;flex-direction:column;position:absolute;top:66px;right:0;left:0;background:#0d0d1a;padding:1rem 2rem;border-bottom:1px solid rgba(139,92,246,0.13);z-index:199;';
+}
+let _nt;
+function showNotif(m){
+  const n=document.getElementById('notif');document.getElementById('notifTxt').textContent=m;
+  n.classList.add('show');clearTimeout(_nt);_nt=setTimeout(()=>n.classList.remove('show'),3500);
+}
+function revealAll(){document.querySelectorAll('.rv:not(.vis)').forEach((el,i)=>setTimeout(()=>{if(el.getBoundingClientRect().top<window.innerHeight+80)el.classList.add('vis');},i*50));}
+window.addEventListener('scroll',()=>document.querySelectorAll('.rv:not(.vis)').forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-20)el.classList.add('vis');}));
+document.addEventListener('click',e=>{
+  const dd=document.getElementById('uDD');if(dd&&!e.target.closest('.u-wrap'))dd.classList.remove('open');
+  if(e.target.classList.contains('overlay'))closeOv(e.target.id);
+});
+revealAll();
+</script>
+</body>
+</html>
